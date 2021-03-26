@@ -37,8 +37,8 @@ for num in range(1, 20):
         propertyType = listing.find('span', attrs={"class": "css-693528"})
         saleData = listing.find('span', attrs={"class": "css-1nj9ymt"})
 
-        currentRecord = PropertyRecord(getattr(price, "text", None), getattr(address, "text", None), getattr(
-            features, "text", None), getattr(propertyType, "text", None), getattr(saleData, "text", None))
+        currentRecord = PropertyRecord(getattr(price, "text", 'N/A'), getattr(address, "text", 'N/A'), getattr(
+            features, "text", 'N/A'), getattr(propertyType, "text", 'N/A'), getattr(saleData, "text", 'N/A'))
 
         allProperties.append(currentRecord)
 
