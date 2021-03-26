@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import requests
 
 # Define a 'property record' class
+
+
 class PropertyRecord:
     def __init__(self, pricing, address, features, propertyType, saleData):
         self.pricing = pricing
@@ -12,27 +14,36 @@ class PropertyRecord:
         self.saleData = saleData
 
 
+def has_class_but_no_id(tag):
+    return tag.has_attr('class') and tag.has_attr('data-testid')
+
+
 # Create list to hold all the properties
 allProperties = []
 
-for num in range(1, 2):
+for num in range(1, 20):
+    # url = str(
+    #     'www.domain.com.au/sold-listings/erskineville-nsw-2043/?excludepricewithheld=1&page='+str(num))
     url = str(
-        'www.domain.com.au/sold-listings/erskineville-nsw-2043/?excludepricewithheld=1&page='+str(num))
+        'www.domain.com.au/sold-listings/lewisham-nsw-2049/?excludepricewithheld=1&page='+str(num))
     r = requests.get("https://" + url, headers={'User-Agent': 'Mozilla/5.0'})
     data = r.text
     soup = BeautifulSoup(data, 'html.parser')
 
-    # Get lists with each property from the page
-    pricesList = soup.select('p[data-testid="listing-card-price"]')
-    addressList = soup.select('span[data-testid="address-line1"]')
-    featuresList = soup.select('div[data-testid="property-features"]')
-    propertyTypeList = soup.findAll('span', {"class": ["css-693528"]})
-    saleDataList = soup.findAll('span', {"class": ["css-1nj9ymt"]})
+    # Get list of Listings
+    results = soup.find('ul', attrs={"data-testid": "results"})
+    pageListings = results.find_all('li', attrs={"data-testid": True})
 
-    # Loop the x items in the lists and add a new 'PropertyRecord' class/object for each one
-    for listIndex in range(0, len(pricesList)):
-        currentRecord = PropertyRecord(pricesList[listIndex].text, addressList[listIndex].text,
-                                       featuresList[listIndex].text, propertyTypeList[listIndex].text, saleDataList[listIndex].text)
+    for listing in pageListings:
+        price = listing.find('p', attrs={"data-testid": "listing-card-price"})
+        address = listing.find('span', attrs={"data-testid": "address-line1"})
+        features = listing.find('div', attrs={"data-testid": "property-features"})
+        propertyType = listing.find('span', attrs={"class": "css-693528"})
+        saleData = listing.find('span', attrs={"class": "css-1nj9ymt"})
+
+        currentRecord = PropertyRecord(getattr(price, "text", None), getattr(address, "text", None), getattr(
+            features, "text", None), getattr(propertyType, "text", None), getattr(saleData, "text", None))
+
         allProperties.append(currentRecord)
 
 print('Total records found: ' + str(len(allProperties)))
