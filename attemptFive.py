@@ -3,8 +3,6 @@ from bs4 import BeautifulSoup
 import requests
 
 # Define a 'property record' class
-
-
 class PropertyRecord:
     def __init__(self, pricing, address, features, propertyType, saleData):
         self.pricing = pricing
@@ -13,10 +11,8 @@ class PropertyRecord:
         self.propertyType = propertyType
         self.saleData = saleData
 
-
 def has_class_but_no_id(tag):
     return tag.has_attr('class') and tag.has_attr('data-testid')
-
 
 # Create list to hold all the properties
 allProperties = []
@@ -49,9 +45,10 @@ for num in range(1, 20):
 print('Total records found: ' + str(len(allProperties)))
 
 for scrapedProperty in allProperties:
-    print('------------------------')
-    print('   ' + scrapedProperty.address)
-    print('   ' + scrapedProperty.pricing)
-    print('   ' + scrapedProperty.features)
-    print('   ' + scrapedProperty.propertyType)
-    print('   ' + scrapedProperty.saleData)
+    #print('------------------------')
+   print('   ' + scrapedProperty.address + '; ' + scrapedProperty.pricing + '; ' + scrapedProperty.features + '; ' + scrapedProperty.propertyType + '; ' + scrapedProperty.saleData + ';')
+    #print('   ' + scrapedProperty.address)
+    #print('   ' + scrapedProperty.pricing)
+    #print('   ' + scrapedProperty.features)
+    #print('   ' + scrapedProperty.propertyType)
+    #print('   ' + scrapedProperty.saleData)
