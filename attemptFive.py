@@ -46,7 +46,7 @@ print('Total records found: ' + str(len(allProperties)))
 
 for scrapedProperty in allProperties:
     #print('------------------------')
-   print('   ' + scrapedProperty.address + '; ' + scrapedProperty.pricing + '; ' + scrapedProperty.features + '; ' + scrapedProperty.propertyType + '; ' + scrapedProperty.saleData + ';')
+   print(+ scrapedProperty.address + '; ' + scrapedProperty.pricing + '; ' + scrapedProperty.features + '; ' + scrapedProperty.propertyType + '; ' + scrapedProperty.saleData + ';')
     #print('   ' + scrapedProperty.address)
     #print('   ' + scrapedProperty.pricing)
     #print('   ' + scrapedProperty.features)
