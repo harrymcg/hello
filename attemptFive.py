@@ -21,7 +21,7 @@ for num in range(1, 20):
     # url = str(
     #     'www.domain.com.au/sold-listings/erskineville-nsw-2043/?excludepricewithheld=1&page='+str(num))
     url = str(
-        'www.domain.com.au/sold-listings/lewisham-nsw-2049/?excludepricewithheld=1&page='+str(num))
+        'www.domain.com.au/sold-listings/wollstonecraft-nsw-2065/?excludepricewithheld=1&page='+str(num))
     r = requests.get("https://" + url, headers={'User-Agent': 'Mozilla/5.0'})
     data = r.text
     soup = BeautifulSoup(data, 'html.parser')
