@@ -11,6 +11,7 @@ class PropertyRecord:
         self.propertyType = propertyType
         self.saleData = saleData
 
+#captures scenario where property value has no specific attribute, e.g. vacant land doesn't have a bathroom
 def has_class_but_no_id(tag):
     return tag.has_attr('class') and tag.has_attr('data-testid')
 
@@ -21,7 +22,7 @@ for num in range(1, 20):
     # url = str(
     #     'www.domain.com.au/sold-listings/randwick-nsw-2031/?excludepricewithheld=1&page='+str(num))
     url = str(
-        'www.domain.com.au/sold-listings/kingsford-nsw-2032/?excludepricewithheld=1&page='+str(num))
+        'www.domain.com.au/sold-listings/summer-hill-nsw-2130/?excludepricewithheld=1&page='+str(num))
     r = requests.get("https://" + url, headers={'User-Agent': 'Mozilla/5.0'})
     data = r.text
     soup = BeautifulSoup(data, 'html.parser')
